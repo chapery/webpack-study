@@ -3,4 +3,4 @@ a();
 var b = require('./app2');
 b();
 
-console.log('index');
+console.log('index2');
