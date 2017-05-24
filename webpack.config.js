@@ -3,10 +3,10 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: './app/main.js',
+    entry: path.join(__dirname, 'src/script/main.js'),
     output: {
-        filename: '[name].js',
-        path: path.resolve(__dirname, 'dist')
+        path: path.join(__dirname, 'dist'),
+        filename: 'js/[name].js'
     },
     module: {
         rules: [
@@ -36,15 +36,17 @@ module.exports = {
             }
         ]
     },
-    devtool: 'eval-source-map',
+    // devtool: 'eval-source-map',
     plugins: [
         new webpack.BannerPlugin('copyright asfdasdfasfd inc.'),
         new HtmlWebpackPlugin({
-            template: path.join(__dirname, 'app/index.tmpl.html')
+            template: './src/template/index.html',
+            filename: 'index.html',
+            inject: 'head',
+            date: new Date()
         })
     ],
     devServer: {
-        contentBase: __dirname,
         port: 8080,
         colors: true,
         historyApiFallback: true,
