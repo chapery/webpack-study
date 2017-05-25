@@ -6,7 +6,8 @@ module.exports = {
     entry: path.join(__dirname, 'src/script/main.js'),
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'js/[name].js'
+        filename: 'js/[name].js',
+        publicPath: 'http://chapery.com'
     },
     module: {
         rules: [
@@ -42,8 +43,11 @@ module.exports = {
         new HtmlWebpackPlugin({
             template: './src/template/index.html',
             filename: 'index.html',
-            inject: 'head',
-            date: new Date()
+            inject: false,
+            minify: {
+                removeComments: true,
+                collapseWhitespace: true
+            }
         })
     ],
     devServer: {
