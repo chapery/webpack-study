@@ -5,9 +5,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>test</title>
-    <script src="<%= htmlWebpackPlugin.files.chunks.main.entry %>"></script>
+    <script>
+        <%= compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substring(htmlWebpackPlugin.files.publicPath.length)].source() %>
+    </script>
 </head>
 <body>
-    <!--this is a comments-->
+<h1>head1</h1>
+<% for (var k in htmlWebpackPlugin.files.chunks) { %>
+    <%　if (k !== 'main') {　%>
+        <script src="<%= htmlWebpackPlugin.files.chunks[k].entry %>"></script>
+    <% } %>
+<% } %>
 </body>
 </html>

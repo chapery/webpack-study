@@ -3,11 +3,15 @@ var path = require('path');
 var HtmlWebpackPlugin = require('html-webpack-plugin');
 
 module.exports = {
-    entry: path.join(__dirname, 'src/script/main.js'),
+    entry: {
+        main: './src/script/main.js',
+        p1: './src/script/p1.js',
+        p2: './src/script/p2.js',
+        p3: './src/script/p3.js'
+    },
     output: {
         path: path.join(__dirname, 'dist'),
-        filename: 'js/[name].js',
-        publicPath: 'http://chapery.com'
+        filename: 'js/[name].js'
     },
     module: {
         rules: [
@@ -19,10 +23,9 @@ module.exports = {
             },
             {
                 test: /\.js$/,
-                exclude: /node_modules/,
-                use:[
-                    {loader: 'babel-loader'}
-                ]
+                include: path.join(__dirname, 'src/script'),
+                exclude: path.join(__dirname, 'node_modules'),
+                use: 'babel-loader'
             },
             {
                 test: /\.css$/,
@@ -32,6 +35,16 @@ module.exports = {
                     },
                     {
                         loader: 'css-loader'
+                    },
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            plugins: [
+                                require('autoprefixer')({
+                                    browsers: ['last 5 versions']
+                                })
+                            ]
+                        }
                     }
                 ]
             }
@@ -39,15 +52,18 @@ module.exports = {
     },
     // devtool: 'eval-source-map',
     plugins: [
-        new webpack.BannerPlugin('copyright asfdasdfasfd inc.'),
+        new webpack.BannerPlugin('copyright webpack-study inc.'),
         new HtmlWebpackPlugin({
             template: './src/template/index.html',
-            filename: 'index.html',
+            filename: 'p1.html',
             inject: false,
-            minify: {
-                removeComments: true,
-                collapseWhitespace: true
-            }
+            chunks: ['main', 'p1']
+        }),
+        new HtmlWebpackPlugin({
+            template: './src/template/index.html',
+            filename: 'p2.html',
+            inject: false,
+            chunks: ['main', 'p2']
         })
     ],
     devServer: {
