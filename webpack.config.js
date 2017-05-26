@@ -6,8 +6,7 @@ module.exports = {
     entry: {
         main: './src/script/main.js',
         p1: './src/script/p1.js',
-        p2: './src/script/p2.js',
-        p3: './src/script/p3.js'
+        p2: './src/script/p2.js'
     },
     output: {
         path: path.join(__dirname, 'dist'),
@@ -34,16 +33,22 @@ module.exports = {
                         loader: 'style-loader'
                     },
                     {
-                        loader: 'css-loader'
+                        loader: 'css-loader',
+                        options: {
+                            modules: true,
+                            importLoaders: 1
+                        }
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: [
-                                require('autoprefixer')({
-                                    browsers: ['last 5 versions']
-                                })
-                            ]
+                            plugins: function(loader) {
+                                return [
+                                    require('autoprefixer')({
+                                        browsers: ['last 5 versions']
+                                    })
+                                ]
+                            }
                         }
                     }
                 ]

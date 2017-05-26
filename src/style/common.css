@@ -1,3 +1,5 @@
+@import './a.css';
 h1{
     color: lightseagreen;
+    transform: translateX(110px);
 }
