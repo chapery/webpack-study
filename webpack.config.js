@@ -12,6 +12,7 @@ module.exports = {
         path: path.join(__dirname, 'dist'),
         filename: 'js/[name].js'
     },
+    devtool: 'eval-source-map',
     module: {
         rules: [
             {
@@ -35,22 +36,52 @@ module.exports = {
                     {
                         loader: 'css-loader',
                         options: {
-                            modules: true,
                             importLoaders: 1
                         }
                     },
                     {
                         loader: 'postcss-loader',
                         options: {
-                            plugins: function(loader) {
-                                return [
-                                    require('autoprefixer')({
+                            config: {
+                                path: './postcss.config.js',
+                                ctx: {
+                                    autoprefixer: {
                                         browsers: ['last 5 versions']
-                                    })
-                                ]
+                                    }
+                                }
                             }
                         }
                     }
+                ]
+            },
+            {
+                test: /\.scss$/,
+                use: [
+                    'style-loader',
+                    'css-loader',
+                    {
+                        loader: 'postcss-loader',
+                        options: {
+                            config: {
+                                path: './postcss.config.js',
+                                ctx: {
+                                    autoprefixer: {
+                                        browsers: ['last 5 versions']
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        loader: 'sass-loader'
+                    }
+                ]
+            },
+            {
+                test: /\.html$/,
+                include: path.join(__dirname, 'src/components/'),
+                use: [
+                    'html-loader'
                 ]
             }
         ]

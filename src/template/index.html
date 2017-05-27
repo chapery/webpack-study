@@ -11,6 +11,7 @@
 </head>
 <body>
 <h1>head1</h1>
+<div id="layer"></div>
 <% for (var k in htmlWebpackPlugin.files.chunks) { %>
     <%　if (k !== 'main') {　%>
         <script src="<%= htmlWebpackPlugin.files.chunks[k].entry %>"></script>

@@ -2,6 +2,6 @@ body{
     background: -webkit-linear-gradient(left, ghostwhite, lime);
 }
 
-/*.mydiv{
+.mydiv{
     transform: rotate(10deg);
-}*/
+}
