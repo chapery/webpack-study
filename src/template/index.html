@@ -5,17 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>test</title>
-    <script>
+    <script type="text/javascript">
         <%= compilation.assets[htmlWebpackPlugin.files.chunks.main.entry.substring(htmlWebpackPlugin.files.publicPath.length)].source() %>
     </script>
 </head>
 <body>
 <h1>head1</h1>
+<div><img src="src/assets/loadingBar.gif" alt="" /></div>
+<div class="loader"></div>
 <div id="layer"></div>
 <% for (var k in htmlWebpackPlugin.files.chunks) { %>
     <%　if (k !== 'main') {　%>
         <script src="<%= htmlWebpackPlugin.files.chunks[k].entry %>"></script>
     <% } %>
 <% } %>
+<div id="footer"></div>
 </body>
 </html>

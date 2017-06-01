@@ -83,6 +83,21 @@ module.exports = {
                 use: [
                     'html-loader'
                 ]
+            },
+            {
+                test: /\.tpl$/,
+                use: 'ejs-loader'
+            },
+            {
+                test: /\.(gif)$/,
+                use: [
+                    {
+                        loader: 'file-loader',
+                        options: {
+                            name: './assets/[name]-[hash:5].[ext]'
+                        }
+                    }
+                ]
             }
         ]
     },

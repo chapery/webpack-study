@@ -3,3 +3,8 @@ h1{
     color: lightseagreen;
     transform: translateX(110px);
 }
+.loader{
+    width: 128px;
+    height: 128px;
+    background-image: url(../assets/loadingBar.gif);
+}
